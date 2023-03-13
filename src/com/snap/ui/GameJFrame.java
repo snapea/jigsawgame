@@ -35,7 +35,6 @@ public class GameJFrame extends JFrame implements KeyListener {
         this.setLayout(null);
 
 
-
         for (int j = 0; j < 4; j++) {
             for (int i = 0; i < 4; i++) {
                 int num = ints[i][j];
@@ -114,9 +113,7 @@ public class GameJFrame extends JFrame implements KeyListener {
         data = new int[4][4];
 
         for (int i = 0; i < newArr.length; i++) {
-
             data[i / 4][i % 4] = newArr[i];
-
         }
         return data;
     }
@@ -135,21 +132,37 @@ public class GameJFrame extends JFrame implements KeyListener {
     public void keyReleased(KeyEvent e) {
         // W：87    S：83    A：65    D：68
         int keyCode = e.getKeyCode();
+        System.out.println(keyCode);
         switch (keyCode) {
             case 87:
-                System.out.println("W");
-                data[x][y] = data[x + 1][y];
-                data[x + 1][y] = 0;
+                if (y != 0) {
+                    System.out.println("W");
+                    data[x][y] = data[x][y - 1];
+                    data[x][y - 1] = 0;
+                }
+                break;
             case 83:
-                System.out.println("S");
+                if (y != 3) {
+                    System.out.println("S");
+                    data[x][y] = data[x][y + 1];
+                    data[x][y + 1] = 0;
+                }
+                break;
             case 65:
-                System.out.println("A");
+                if (x != 0) {
+                    System.out.println("A");
+                    data[x][y] = data[x - 1][y];
+                    data[x - 1][y] = 0;
+                }
+                break;
             case 68:
-                System.out.println("D");
+                if (x != 3) {
+                    System.out.println("D");
+                    data[x][y] = data[x + 1][y];
+                    data[x + 1][y] = 0;
+                }
+                break;
         }
         initImage();
-
-
-
     }
 }
